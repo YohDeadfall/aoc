@@ -7,7 +7,7 @@ pub(crate) fn run_part_1() {
         .windows(2)
         .filter(|w| w[0] < w[1])
         .count();
-    
+
     println!("day 1 part 1: {}", result);
 }
 
@@ -23,6 +23,6 @@ pub(crate) fn run_part_2() {
         .windows(2)
         .filter(|w| w[0] < w[1])
         .count();
-    
+
     println!("day 1 part 2: {}", result);
 }
