@@ -37,7 +37,7 @@ pub(crate) fn run_part_2() {
         };
     }
 
-    println!("day 2 part 1: {}", horizontal * vertical);
+    println!("day 2 part 2: {}", horizontal * vertical);
 }
 
 enum Command {
