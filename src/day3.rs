@@ -44,49 +44,49 @@ pub(crate) fn run_part_2() {
         })
         .collect::<Vec<_>>();
 
-    fn find_number(numbers: &[usize], bits: u8, frequent: bool) -> Option<usize> {
-        let mut generations = vec![1u8; numbers.len()];
-        for bit in (0..bits).rev() {
-            let mut len = 0usize;
-            let mut ones = 0usize;
-            let current_gen = bits - bit;
-            for (index, number) in numbers.iter().enumerate() {
-                if generations[index] == current_gen {
-                    len += 1;
-                    if number & (1 << bit) != 0 {
-                        ones += 1;
-                    }
-                }
-            }
-
-            let pattern = if len <= ones * 2 {
-                frequent as usize
-            } else {
-                !frequent as usize
-            };
-            let mut results = 0usize;
-            let mut result = None;
-            for (index, number) in numbers.iter().enumerate() {
-                if generations[index] == current_gen {
-                    if pattern == ((*number >> bit) & 1) {
-                        generations[index] = current_gen + 1;
-
-                        results += 1;
-                        result = Some(*number);
-                    }
-                }
-            }
-
-            if results == 1 {
-                return result;
-            }
-        }
-
-        None
-    }
-
     let oxygen = find_number(&numbers, bits, true).unwrap();
     let co2 = find_number(&numbers, bits, false).unwrap();
 
     println!("day 3 part 2: {}", oxygen * co2);
+}
+
+fn find_number(numbers: &[usize], bits: u8, frequent: bool) -> Option<usize> {
+    let mut generations = vec![1u8; numbers.len()];
+    for bit in (0..bits).rev() {
+        let mut len = 0usize;
+        let mut ones = 0usize;
+        let current_gen = bits - bit;
+        for (index, number) in numbers.iter().enumerate() {
+            if generations[index] == current_gen {
+                len += 1;
+                if number & (1 << bit) != 0 {
+                    ones += 1;
+                }
+            }
+        }
+
+        let pattern = if len <= ones * 2 {
+            frequent as usize
+        } else {
+            !frequent as usize
+        };
+        let mut results = 0usize;
+        let mut result = None;
+        for (index, number) in numbers.iter().enumerate() {
+            if generations[index] == current_gen {
+                if pattern == ((*number >> bit) & 1) {
+                    generations[index] = current_gen + 1;
+
+                    results += 1;
+                    result = Some(*number);
+                }
+            }
+        }
+
+        if results == 1 {
+            return result;
+        }
+    }
+
+    None
 }
