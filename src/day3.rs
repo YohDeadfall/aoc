@@ -87,6 +87,6 @@ pub(crate) fn run_part_2() {
 
     let oxygen = find_number(&numbers, bits, true).unwrap();
     let co2 = find_number(&numbers, bits, false).unwrap();
-    
-    println!("day 3 part 1: {}", oxygen * co2);
+
+    println!("day 3 part 2: {}", oxygen * co2);
 }
